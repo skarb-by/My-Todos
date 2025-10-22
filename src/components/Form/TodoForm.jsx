@@ -2,10 +2,10 @@ import './TodoForm.css'
 import { useState, useEffect, useCallback } from 'react'
 import TodoInputTitle from './TodoInputTitle/TodoInputTitle.jsx'
 import TodoInputDescription from './TodoInputDescription/TodoInputDescription.jsx'
-
 import TodoBtn from './TodoBtn/TodoBtn.jsx'
 import BtnArea from './BtnArea/BtnArea.jsx'
 import TodoList from './TodoList/TodoList.jsx'
+
 const TodoForm = () => {
 	const [activeBtn, setActiveBtn] = useState('todo')
 	const [allTodos, setAllTodos] = useState([])
@@ -13,78 +13,104 @@ const TodoForm = () => {
 	const [newDescription, setNewDescription] = useState('')
 	const [completedTodos, setCompletedTodos] = useState([])
 
+	// Добавление новой задачи
 	const handleAddTodo = useCallback(() => {
 		if (!newTitle.trim() || !newDescription.trim()) return
 
-		setAllTodos(prev => {
-			const updatedTodos = [
-				{ title: newTitle, description: newDescription, id: Date.now() },
-				...prev,
-			]
-			localStorage.setItem('todolist', JSON.stringify(updatedTodos))
-			return updatedTodos
-		})
+		const newTodo = {
+			title: newTitle,
+			description: newDescription,
+			id: Date.now(),
+		}
+		const updatedTodos = [newTodo, ...allTodos]
+
+		setAllTodos(updatedTodos)
+		localStorage.setItem('todolist', JSON.stringify(updatedTodos))
+
 		setNewTitle('')
 		setNewDescription('')
-	}, [newTitle, newDescription])
+	}, [newTitle, newDescription, allTodos])
 
-	const handleDeleteTodo = useCallback(id => {
-		const updatedTodos = allTodos.filter(todo => todo.id !== id)
-		localStorage.setItem('todolist', JSON.stringify(updatedTodos))
-		setAllTodos(updatedTodos)
-	}, [])
+	// Удаление активной задачи
+	const handleDeleteTodo = useCallback(
+		id => {
+			const updatedTodos = allTodos.filter(todo => todo.id !== id)
+			setAllTodos(updatedTodos)
+			localStorage.setItem('todolist', JSON.stringify(updatedTodos))
+		},
+		[allTodos]
+	)
 
-	const handleCompleteTodo = useCallback(id => {
-		const now = new Date()
-		const completedOn = `${String(now.getDate()).padStart(2, '0')}-${String(
-			now.getMonth() + 1
-		).padStart(2, '0')}-${now.getFullYear()} в ${String(
-			now.getHours()
-		).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(
-			now.getSeconds()
-		).padStart(2, '0')}`
+	// Завершение задачи
+	const handleCompleteTodo = useCallback(
+		id => {
+			const now = new Date()
+			const completedOn = `${String(now.getDate()).padStart(2, '0')}-${String(
+				now.getMonth() + 1
+			).padStart(2, '0')}-${now.getFullYear()} в ${String(
+				now.getHours()
+			).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(
+				now.getSeconds()
+			).padStart(2, '0')}`
 
-		const filteredItem = allTodos.find(todo => todo.id === id)
-		if (!filteredItem) return
+			const todoToComplete = allTodos.find(todo => todo.id === id)
+			if (!todoToComplete) return
 
-		const completedItem = { ...filteredItem, completedOn }
+			const remainingTodos = allTodos.filter(todo => todo.id !== id)
+			const updatedCompleted = [
+				{ ...todoToComplete, completedOn },
+				...completedTodos,
+			]
 
-		setCompletedTodos(prev => {
-			const updatedCompleted = [completedItem, ...prev]
+			setAllTodos(remainingTodos)
+			setCompletedTodos(updatedCompleted)
+
+			localStorage.setItem('todolist', JSON.stringify(remainingTodos))
 			localStorage.setItem('completedTodos', JSON.stringify(updatedCompleted))
-			return updatedCompleted
-		})
+		},
+		[allTodos, completedTodos]
+	)
 
-		const remainingTodos = allTodos.filter(todo => todo.id !== id)
-		localStorage.setItem('todolist', JSON.stringify(remainingTodos))
-		setAllTodos(remainingTodos)
-	}, [])
+	// Удаление завершенной задачи
+	const handleDeleteCompletedTodo = useCallback(
+		id => {
+			const updatedCompleted = completedTodos.filter(todo => todo.id !== id)
+			setCompletedTodos(updatedCompleted)
+			localStorage.setItem('completedTodos', JSON.stringify(updatedCompleted))
+		},
+		[completedTodos]
+	)
 
-	const handleDeleteCompletedTodo = useCallback(id => {
-		const updatedCompleted = completedTodos.filter(todo => todo.id !== id)
-		localStorage.setItem('completedTodos', JSON.stringify(updatedCompleted))
-		setCompletedTodos(updatedCompleted)
-	}, [])
+	// Обработчики для input
+	const handleTitleChange = useCallback(e => setNewTitle(e.target.value), [])
+	const handleDescriptionChange = useCallback(
+		e => setNewDescription(e.target.value),
+		[]
+	)
+
+	// Загрузка из localStorage при старте
 	useEffect(() => {
-		const savedTodo = JSON.parse(localStorage.getItem('todolist'))
-		const savedCompleted = JSON.parse(localStorage.getItem('completedTodos'))
-		if (Array.isArray(savedTodo)) setAllTodos(savedTodo)
-		if (Array.isArray(savedCompleted)) setCompletedTodos(savedCompleted)
+		try {
+			const savedTodo = JSON.parse(localStorage.getItem('todolist'))
+			const savedCompleted = JSON.parse(localStorage.getItem('completedTodos'))
+			if (Array.isArray(savedTodo)) setAllTodos(savedTodo)
+			if (Array.isArray(savedCompleted)) setCompletedTodos(savedCompleted)
+		} catch (e) {
+			// Игнорируем ошибки парсинга
+		}
 	}, [])
 
 	return (
 		<div className='todo__wrapper'>
 			<div className='todo__form-input'>
-				<TodoInputTitle
-					title={newTitle}
-					inputTitle={e => setNewTitle(e.target.value)}
-				/>
+				<TodoInputTitle title={newTitle} inputTitle={handleTitleChange} />
 				<TodoInputDescription
 					description={newDescription}
-					inputDescription={e => setNewDescription(e.target.value)}
+					inputDescription={handleDescriptionChange}
 				/>
 				<TodoBtn handleAddTodo={handleAddTodo} />
 			</div>
+
 			<BtnArea activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
 
 			{activeBtn === 'todo' ? (
