@@ -1,0 +1,44 @@
+.todo__wrapper {
+	background: #353434;
+	padding: 2%;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3%;
+	max-height: 80vh;
+	overflow-y: auto;
+	box-shadow: 0px 5px 7px rgb(27, 27, 27);
+}
+
+.todo__form-input {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid rgb(78, 78, 78);
+	padding-bottom: 25px;
+	margin-bottom: 25px;
+}
+
+.todo__input-item {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-right: 25px;
+}
+
+.todo__input-item label {
+	font-weight: 800;
+	margin-bottom: 10px;
+	font-size: 25px;
+	line-height: 1.14;
+}
+
+.todo__input-item input {
+	padding: 8px;
+	width: 250px;
+	border: none;
+}
+
+.todo__input-item input:focus {
+	outline: 2px solid rgb(0, 230, 122);
+}
