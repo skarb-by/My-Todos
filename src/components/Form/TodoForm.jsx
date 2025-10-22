@@ -1,5 +1,5 @@
 import './TodoForm.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import TodoInputTitle from './TodoInputTitle/TodoInputTitle.jsx'
 import TodoInputDescription from './TodoInputDescription/TodoInputDescription.jsx'
 
@@ -13,7 +13,7 @@ const TodoForm = () => {
 	const [newDescription, setNewDescription] = useState('')
 	const [completedTodos, setCompletedTodos] = useState([])
 
-	const handleAddTodo = () => {
+	const handleAddTodo = useCallback(() => {
 		if (!newTitle.trim() || !newDescription.trim()) return
 
 		setAllTodos(prev => {
@@ -26,15 +26,15 @@ const TodoForm = () => {
 		})
 		setNewTitle('')
 		setNewDescription('')
-	}
+	}, [newTitle, newDescription])
 
-	const handleDeleteTodo = id => {
+	const handleDeleteTodo = useCallback(id => {
 		const updatedTodos = allTodos.filter(todo => todo.id !== id)
 		localStorage.setItem('todolist', JSON.stringify(updatedTodos))
 		setAllTodos(updatedTodos)
-	}
+	}, [])
 
-	const handleCompleteTodo = id => {
+	const handleCompleteTodo = useCallback(id => {
 		const now = new Date()
 		const completedOn = `${String(now.getDate()).padStart(2, '0')}-${String(
 			now.getMonth() + 1
@@ -58,13 +58,13 @@ const TodoForm = () => {
 		const remainingTodos = allTodos.filter(todo => todo.id !== id)
 		localStorage.setItem('todolist', JSON.stringify(remainingTodos))
 		setAllTodos(remainingTodos)
-	}
+	}, [])
 
-	const handleDeleteCompletedTodo = id => {
+	const handleDeleteCompletedTodo = useCallback(id => {
 		const updatedCompleted = completedTodos.filter(todo => todo.id !== id)
 		localStorage.setItem('completedTodos', JSON.stringify(updatedCompleted))
 		setCompletedTodos(updatedCompleted)
-	}
+	}, [])
 	useEffect(() => {
 		const savedTodo = JSON.parse(localStorage.getItem('todolist'))
 		const savedCompleted = JSON.parse(localStorage.getItem('completedTodos'))
