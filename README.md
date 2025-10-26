@@ -102,6 +102,56 @@ src/
 
 ## 📸 Скриншот интерфейса
 
+<img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/1.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+ <img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/2.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+ <img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/3.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+ <img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/4.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+ <img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/5.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+ <img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/6.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+  <img
+  src="https://raw.githubusercontent.com/skarb-by/images/refs/heads/main/help/MyTodos/7.jpg"
+  alt=""
+  title=""
+  style="display: inline-block; margin: 0 auto; ">
+
+ <hr/>
+
 ---
 
 ## ⚙️ Установка и запуск
