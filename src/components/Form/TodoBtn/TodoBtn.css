@@ -44,3 +44,17 @@
 		0 6px 18px rgba(0, 230, 122, 0.45),
 		0 2px 8px rgba(0, 0, 0, 0.08);
 }
+
+
+
+
+
+@media (max-width: 786px) {
+	.primaryBtn {
+		font-size: 13px;
+		padding: 6px 16px;
+		margin-top: 15px;
+	}
+
+
+}

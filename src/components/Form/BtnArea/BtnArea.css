@@ -100,3 +100,20 @@
 .right {
 	border-radius: 0px 6px 6px 0px;
 }
+
+@media (max-width: 786px) {
+
+	.secondaryBtn,
+	.active {
+
+		font-size: 13px;
+		padding: 6px 16px;
+	}
+}
+
+@media (max-width: 560px) {
+	.btn__area {
+		justify-content: center;
+	}
+
+}

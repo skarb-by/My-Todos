@@ -17,3 +17,24 @@
 body[data-theme='light'] .clock {
 	color: #00c46a;
 }
+
+@media (max-width: 768px) {
+	.clock__time {
+		font-size: 20px;
+	}
+
+	.clock__date {
+		font-size: 14px;
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.clock__time {
+		font-size: 16px;
+	}
+
+	.clock__date {
+		font-size: 12px;
+	}
+}

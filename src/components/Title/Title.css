@@ -101,3 +101,16 @@ body[data-theme='light'] .title:hover {
 			0 0 10px rgba(0, 0, 0, 0.08);
 	}
 }
+
+@media (max-width: 768px) {
+	.title {
+		font-size: 36px;
+		letter-spacing: 1.5px;
+	}
+}
+
+@media (max-width: 480px) {
+	.title {
+		font-size: 28px;
+	}
+}

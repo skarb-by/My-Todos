@@ -37,3 +37,21 @@ body[data-theme='light'] .theme-toggle {
 	color: #222;
 	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
+
+
+@media (max-width: 768px) {
+
+	.theme-toggle {
+		width: 40px;
+		height: 40px;
+	}
+
+
+	.theme-toggle__icon,
+	.theme-toggle svg {
+		pointer-events: none;
+		width: 20px;
+		height: 20px;
+
+	}
+}
