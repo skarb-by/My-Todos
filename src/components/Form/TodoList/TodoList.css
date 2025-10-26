@@ -39,6 +39,55 @@
 	line-height: 1.12;
 }
 
+.edit__wrapper {
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.edit__wrapper input,
+.edit__wrapper textarea {
+	border: none;
+	padding: 10px;
+	margin: 5px;
+}
+
+.edit__wrapper input:focus,
+.edit__wrapper textarea:focus {
+	outline: 2px solid rgb(0, 230, 122);
+}
+
+.edit__btns {
+	display: flex;
+	gap: 10px;
+}
+
+.edit__wrapper .primaryBtn {
+	margin-top: 10px;
+	margin-left: 5px;
+}
+
+.primaryBtn.cancel {
+	background: linear-gradient(135deg, #ff4b4b, #c70000);
+	color: #fff;
+	font-weight: 600;
+	border-radius: 8px;
+	padding: 8px 16px;
+	box-shadow:
+		0 4px 10px rgba(255, 75, 75, 0.3),
+		0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease-in-out;
+}
+
+.primaryBtn.cancel:hover {
+	background: linear-gradient(135deg, #ff1a1a, #a50000);
+	box-shadow:
+		0 6px 18px rgba(255, 50, 50, 0.45),
+		0 2px 8px rgba(0, 0, 0, 0.15);
+
+}
+
 .icon {
 	font-size: 35px;
 	cursor: pointer;
@@ -58,7 +107,7 @@
 .check__icon {
 	font-size: 35px;
 	margin-left: 10px;
-	color: rgb(0, 230, 122);
+	color: #555555;
 	transition: all 0.3s ease-in-out;
 	display: inline-flex;
 	align-items: center;

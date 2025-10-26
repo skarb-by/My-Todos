@@ -12,6 +12,8 @@ const TodoForm = () => {
 	const [newTitle, setNewTitle] = useState('')
 	const [newDescription, setNewDescription] = useState('')
 	const [completedTodos, setCompletedTodos] = useState([])
+	const [currentEdit, setCurrentEdit] = useState('')
+	const [currentEditedItem, setCurrentEditItem] = useState(null)
 
 	const handleAddTodo = useCallback(() => {
 		if (!newTitle.trim() || !newDescription.trim()) return
@@ -95,6 +97,37 @@ const TodoForm = () => {
 			console.log(e)
 		}
 	}, [])
+	const handleEdit = useCallback(
+		id => {
+			setCurrentEdit(id)
+			const item = allTodos.find(t => t.id === id)
+			setCurrentEditItem(item)
+		},
+		[allTodos]
+	)
+
+	const handleUpdateTitle = useCallback(value => {
+		setCurrentEditItem(prev => (prev ? { ...prev, title: value } : prev))
+	}, [])
+
+	const handleUpdateDescription = useCallback(value => {
+		setCurrentEditItem(prev => (prev ? { ...prev, description: value } : prev))
+	}, [])
+
+	const handleUpdateToDo = useCallback(() => {
+		const updatedTodos = allTodos.map(todo =>
+			todo.id === currentEdit ? currentEditedItem : todo
+		)
+		setAllTodos(updatedTodos)
+		localStorage.setItem('todolist', JSON.stringify(updatedTodos))
+		setCurrentEdit('')
+		setCurrentEditItem(null)
+	}, [allTodos, currentEdit, currentEditedItem])
+
+	const handleUpdateToDoCancel = useCallback(() => {
+		setCurrentEdit('')
+		setCurrentEditItem(null)
+	}, [])
 
 	return (
 		<div className='todo__wrapper'>
@@ -115,6 +148,13 @@ const TodoForm = () => {
 					handleDeleteTodo={handleDeleteTodo}
 					handleCompleteTodo={handleCompleteTodo}
 					showCompleteIcon={true}
+					currentEdit={currentEdit}
+					handleEdit={handleEdit}
+					handleUpdateTitle={handleUpdateTitle}
+					handleUpdateDescription={handleUpdateDescription}
+					currentEditedItem={currentEditedItem}
+					handleUpdateToDo={handleUpdateToDo}
+					handleUpdateToDoCancel={handleUpdateToDoCancel}
 				/>
 			) : (
 				<TodoList

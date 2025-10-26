@@ -1,5 +1,5 @@
 import './ThemeToggle.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, memo } from 'react'
 import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
 
 const ThemeToggle = () => {
@@ -15,9 +15,9 @@ const ThemeToggle = () => {
 		localStorage.setItem('theme', theme)
 	}, [theme])
 
-	const toggleTheme = () => {
+	const toggleTheme = useCallback(() => {
 		setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
-	}
+	}, [])
 
 	return (
 		<button
@@ -33,4 +33,4 @@ const ThemeToggle = () => {
 	)
 }
 
-export default ThemeToggle
+export default memo(ThemeToggle)
