@@ -13,7 +13,6 @@ const TodoForm = () => {
 	const [newDescription, setNewDescription] = useState('')
 	const [completedTodos, setCompletedTodos] = useState([])
 
-	// Добавление новой задачи
 	const handleAddTodo = useCallback(() => {
 		if (!newTitle.trim() || !newDescription.trim()) return
 
@@ -22,6 +21,7 @@ const TodoForm = () => {
 			description: newDescription,
 			id: Date.now(),
 		}
+
 		const updatedTodos = [newTodo, ...allTodos]
 
 		setAllTodos(updatedTodos)
@@ -31,7 +31,6 @@ const TodoForm = () => {
 		setNewDescription('')
 	}, [newTitle, newDescription, allTodos])
 
-	// Удаление активной задачи
 	const handleDeleteTodo = useCallback(
 		id => {
 			const updatedTodos = allTodos.filter(todo => todo.id !== id)
@@ -41,7 +40,6 @@ const TodoForm = () => {
 		[allTodos]
 	)
 
-	// Завершение задачи
 	const handleCompleteTodo = useCallback(
 		id => {
 			const now = new Date()
@@ -71,7 +69,6 @@ const TodoForm = () => {
 		[allTodos, completedTodos]
 	)
 
-	// Удаление завершенной задачи
 	const handleDeleteCompletedTodo = useCallback(
 		id => {
 			const updatedCompleted = completedTodos.filter(todo => todo.id !== id)
@@ -81,22 +78,21 @@ const TodoForm = () => {
 		[completedTodos]
 	)
 
-	// Обработчики для input
 	const handleTitleChange = useCallback(e => setNewTitle(e.target.value), [])
 	const handleDescriptionChange = useCallback(
 		e => setNewDescription(e.target.value),
 		[]
 	)
 
-	// Загрузка из localStorage при старте
 	useEffect(() => {
 		try {
 			const savedTodo = JSON.parse(localStorage.getItem('todolist'))
 			const savedCompleted = JSON.parse(localStorage.getItem('completedTodos'))
+
 			if (Array.isArray(savedTodo)) setAllTodos(savedTodo)
 			if (Array.isArray(savedCompleted)) setCompletedTodos(savedCompleted)
 		} catch (e) {
-			// Игнорируем ошибки парсинга
+			console.log(e)
 		}
 	}, [])
 

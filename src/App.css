@@ -3,10 +3,12 @@ body {
   height: 100%;
   margin: 0;
   overflow-y: auto;
-  /* скролл на body */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
 }
-
-
 
 body[data-theme='dark'] {
   font-family: "Roboto", sans-serif;
@@ -22,28 +24,20 @@ body[data-theme='light'] {
 
 body::-webkit-scrollbar {
   width: 10px;
-  /* толщина вертикального скролла */
   height: 10px;
-  /* толщина горизонтального скролла */
 }
 
-/* Ползунок */
 body::-webkit-scrollbar-thumb {
   border-radius: 6px;
   border: 3px solid #f0f0f0;
-  /* отступ между thumb и треком */
   background-color: #00e67a;
-  /* цвет ползунка по умолчанию */
 }
 
-/* Трек */
 body::-webkit-scrollbar-track {
   background-color: #1f1f1f;
-  /* цвет фона скролла */
   border-radius: 6px;
 }
 
-/* Тёмная тема */
 body[data-theme='dark']::-webkit-scrollbar-thumb {
   background-color: #00e67a;
   border-color: #1f1f1f;
@@ -53,16 +47,26 @@ body[data-theme='dark']::-webkit-scrollbar-track {
   background-color: #1f1f1f;
 }
 
-/* Светлая тема */
 body[data-theme='light']::-webkit-scrollbar-thumb {
   background-color: #00c46a;
-
   border-color: #f5f5f5;
 }
 
 body[data-theme='light']::-webkit-scrollbar-track {
   background-color: #f5f5f5;
 }
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  /* выравнивание по правому краю */
+  align-items: center;
+  /* по вертикали на одном уровне */
+  gap: 15px;
+  /* расстояние между кнопкой и часами */
+  margin: 5px;
+}
+
 
 
 

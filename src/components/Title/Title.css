@@ -7,7 +7,7 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	text-align: center;
-	margin: 40px auto;
+	margin: 20px auto;
 	position: relative;
 	animation: fadeIn 1s ease-out forwards, pulseGlow 4s ease-in-out infinite;
 	transition: all 0.4s ease;
@@ -74,7 +74,6 @@
 body[data-theme='light'] .title {
 	background: linear-gradient(90deg, #2b2a2a 0%, #8d8b8b 100%);
 	-webkit-background-clip: text;
-
 	animation: fadeIn 1s ease-out forwards, pulseGlowLight 4s ease-in-out infinite;
 }
 

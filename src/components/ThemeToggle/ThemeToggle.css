@@ -1,11 +1,8 @@
+/* ThemeToggle.css */
 .theme-toggle {
-	position: fixed;
-	top: 18px;
-	right: 18px;
 	width: 56px;
 	height: 56px;
 	padding: 6px;
-	/* увеличивает область тапа */
 	border-radius: 999px;
 	display: flex;
 	align-items: center;
@@ -17,10 +14,10 @@
 	transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
 	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
 	z-index: 1000;
-	/* чтобы быть поверх других элементов */
+	/* Чтобы быть поверх других элементов */
 }
 
-/* Увеличение при наведении / нажатии */
+/* Наведение и клик */
 .theme-toggle:hover {
 	transform: translateY(-3px) scale(1.05);
 	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55);
@@ -30,16 +27,17 @@
 	transform: translateY(0) scale(0.98);
 }
 
-/* Иконка внутри кнопки не перехватывает события */
+/* Иконка внутри кнопки */
 .theme-toggle__icon,
 .theme-toggle svg {
 	pointer-events: none;
+	/* Иконка не перехватывает события */
 	width: 26px;
 	height: 26px;
 	display: inline-block;
 }
 
-/* Лёгкая светлая вариация, когда выбран светлый режим */
+/* Светлая тема для самой кнопки */
 body[data-theme='light'] .theme-toggle {
 	background: linear-gradient(135deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.02));
 	color: #222;

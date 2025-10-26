@@ -1,0 +1,19 @@
+.clock {
+	font-family: 'Roboto', sans-serif;
+	color: #00e67a;
+}
+
+.clock__time {
+	font-size: 25px;
+	font-weight: 700;
+}
+
+.clock__date {
+	font-size: 15px;
+	margin-top: 5px;
+}
+
+/* Светлая тема */
+body[data-theme='light'] .clock {
+	color: #00c46a;
+}
