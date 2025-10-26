@@ -70,25 +70,21 @@
 	}
 }
 
-/* Светлая тема */
 body[data-theme='light'] .title {
 	background: linear-gradient(90deg, #2b2a2a 0%, #8d8b8b 100%);
 	-webkit-background-clip: text;
 	animation: fadeIn 1s ease-out forwards, pulseGlowLight 4s ease-in-out infinite;
 }
 
-/* Линия под заголовком в светлой теме */
 body[data-theme='light'] .title::after {
 	background: linear-gradient(90deg, #2b2a2a, #8d8b8b);
 }
 
-/* Ховер в светлой теме */
 body[data-theme='light'] .title:hover {
 	text-shadow: 0 0 16px rgba(0, 0, 0, 0.5),
 		0 0 32px rgba(0, 0, 0, 0.3);
 }
 
-/* "Дыхание" свечением для светлой темы */
 @keyframes pulseGlowLight {
 	0% {
 		text-shadow: 0 0 5px rgba(0, 0, 0, 0.15),

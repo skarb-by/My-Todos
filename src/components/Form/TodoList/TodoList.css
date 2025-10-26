@@ -71,22 +71,15 @@
 	text-shadow: 0 2px 6px rgba(0, 230, 122, 0.4);
 }
 
-
-
 body[data-theme='light'] .todo__list-item {
 	background: linear-gradient(145deg, #ffffff, #e0e0e0);
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
 }
 
 body[data-theme='light'] .todo__list-item:hover {
 	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-
-
 body[data-theme='light'] .todo__list-item p {
-
 	color: rgb(85, 82, 82);
-
 }

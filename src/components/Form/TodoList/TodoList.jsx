@@ -7,7 +7,6 @@ const TodoList = ({
 	all,
 	handleDeleteTodo,
 	handleCompleteTodo,
-
 	showCompleteIcon = true,
 }) => {
 	return (

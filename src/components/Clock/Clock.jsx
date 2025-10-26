@@ -9,7 +9,7 @@ const Clock = () => {
 			setCurrentTime(new Date())
 		}, 1000)
 
-		return () => clearInterval(timerId) // очищаем таймер при размонтировании
+		return () => clearInterval(timerId)
 	}, [])
 
 	const formatTime = date => {
