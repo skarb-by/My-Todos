@@ -25,12 +25,12 @@ const TodoList = ({
 							<div className='edit__wrapper'>
 								<input
 									value={currentEditedItem?.title ?? ''}
-									placeholder='Updated Title'
+									placeholder='Обновленный заголовок'
 									onChange={e => handleUpdateTitle(e.target.value)}
 								/>
 								<textarea
 									value={currentEditedItem?.description ?? ''}
-									placeholder='Updated Description'
+									placeholder='Обновленное описание'
 									rows={4}
 									onChange={e => handleUpdateDescription(e.target.value)}
 								/>
@@ -77,7 +77,7 @@ const TodoList = ({
 									<AiOutlineEdit
 										className='check__icon'
 										onClick={() => handleEdit(item.id)}
-										title='Edit?'
+										title='Редактировать?'
 									/>
 									<BsCheckLg
 										className='check__icon'
