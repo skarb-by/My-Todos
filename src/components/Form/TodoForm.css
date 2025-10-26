@@ -64,7 +64,6 @@ body[data-theme='light'] .todo__wrapper {
 	.todo__input-item input {
 		width: 500px;
 	}
-
 }
 
 @media (max-width: 560px) {
