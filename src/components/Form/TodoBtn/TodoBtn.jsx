@@ -1,10 +1,20 @@
 import './TodoBtn.css'
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 
-const TodoBtn = ({ handleAddTodo }) => {
+const TodoBtn = ({ handleAddTodo, isDisabled }) => {
+	const onClick = useCallback(() => {
+		if (!isDisabled) handleAddTodo()
+	}, [handleAddTodo, isDisabled])
+
 	return (
 		<div className='todo__input-item'>
-			<button type='button' onClick={handleAddTodo} className='primaryBtn'>
+			<button
+				type='button'
+				onClick={onClick}
+				className='primaryBtn'
+				disabled={isDisabled}
+				aria-label='Добавить задачу'
+			>
 				Добавить
 			</button>
 		</div>

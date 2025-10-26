@@ -3,12 +3,9 @@ import { useEffect, useState, useCallback, memo } from 'react'
 import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
 
 const ThemeToggle = () => {
-	const [theme, setTheme] = useState('dark')
-
-	useEffect(() => {
-		const saved = localStorage.getItem('theme')
-		if (saved) setTheme(saved)
-	}, [])
+	const [theme, setTheme] = useState(
+		() => localStorage.getItem('theme') || 'dark'
+	)
 
 	useEffect(() => {
 		document.body.setAttribute('data-theme', theme)
@@ -19,12 +16,14 @@ const ThemeToggle = () => {
 		setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
 	}, [])
 
+	const nextThemeLabel = theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'
+
 	return (
 		<button
 			className='theme-toggle'
 			onClick={toggleTheme}
-			aria-label={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
-			title={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+			aria-label={nextThemeLabel}
+			title={nextThemeLabel}
 		>
 			<span className='theme-toggle__icon'>
 				{theme === 'dark' ? <BsSunFill /> : <BsMoonStarsFill />}

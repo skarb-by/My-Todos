@@ -15,12 +15,15 @@ const TodoForm = () => {
 	const [currentEdit, setCurrentEdit] = useState('')
 	const [currentEditedItem, setCurrentEditItem] = useState(null)
 
+	// -------------------
+	// Добавление задачи с проверкой на пустые значения
+	// -------------------
 	const handleAddTodo = useCallback(() => {
-		if (!newTitle.trim() || !newDescription.trim()) return
+		if (!newTitle.trim() || !newDescription.trim()) return // уже предотвращает пустые
 
 		const newTodo = {
-			title: newTitle,
-			description: newDescription,
+			title: newTitle.trim(), // trim() — убираем пробелы по краям
+			description: newDescription.trim(),
 			id: Date.now(),
 		}
 
@@ -33,6 +36,9 @@ const TodoForm = () => {
 		setNewDescription('')
 	}, [newTitle, newDescription, allTodos])
 
+	// -------------------
+	// Удаление активной задачи
+	// -------------------
 	const handleDeleteTodo = useCallback(
 		id => {
 			const updatedTodos = allTodos.filter(todo => todo.id !== id)
@@ -42,6 +48,9 @@ const TodoForm = () => {
 		[allTodos]
 	)
 
+	// -------------------
+	// Завершение задачи
+	// -------------------
 	const handleCompleteTodo = useCallback(
 		id => {
 			const now = new Date()
@@ -71,6 +80,9 @@ const TodoForm = () => {
 		[allTodos, completedTodos]
 	)
 
+	// -------------------
+	// Удаление завершенной задачи
+	// -------------------
 	const handleDeleteCompletedTodo = useCallback(
 		id => {
 			const updatedCompleted = completedTodos.filter(todo => todo.id !== id)
@@ -80,12 +92,18 @@ const TodoForm = () => {
 		[completedTodos]
 	)
 
+	// -------------------
+	// Обновление полей ввода
+	// -------------------
 	const handleTitleChange = useCallback(e => setNewTitle(e.target.value), [])
 	const handleDescriptionChange = useCallback(
 		e => setNewDescription(e.target.value),
 		[]
 	)
 
+	// -------------------
+	// Загрузка из localStorage
+	// -------------------
 	useEffect(() => {
 		try {
 			const savedTodo = JSON.parse(localStorage.getItem('todolist'))
@@ -97,6 +115,10 @@ const TodoForm = () => {
 			console.log(e)
 		}
 	}, [])
+
+	// -------------------
+	// Редактирование задачи
+	// -------------------
 	const handleEdit = useCallback(
 		id => {
 			setCurrentEdit(id)
@@ -114,9 +136,26 @@ const TodoForm = () => {
 		setCurrentEditItem(prev => (prev ? { ...prev, description: value } : prev))
 	}, [])
 
+	// -------------------
+	// Сохранение редактирования с проверкой на пустые значения
+	// -------------------
 	const handleUpdateToDo = useCallback(() => {
+		if (
+			!currentEditedItem?.title?.trim() ||
+			!currentEditedItem?.description?.trim()
+		) {
+			alert('Нельзя сохранять пустые поля!')
+			return
+		}
+
 		const updatedTodos = allTodos.map(todo =>
-			todo.id === currentEdit ? currentEditedItem : todo
+			todo.id === currentEdit
+				? {
+						...currentEditedItem,
+						title: currentEditedItem.title.trim(),
+						description: currentEditedItem.description.trim(),
+				  }
+				: todo
 		)
 		setAllTodos(updatedTodos)
 		localStorage.setItem('todolist', JSON.stringify(updatedTodos))
@@ -137,7 +176,11 @@ const TodoForm = () => {
 					description={newDescription}
 					inputDescription={handleDescriptionChange}
 				/>
-				<TodoBtn handleAddTodo={handleAddTodo} />
+				{/* Добавлена блокировка кнопки при пустых полях */}
+				<TodoBtn
+					handleAddTodo={handleAddTodo}
+					isDisabled={!newTitle.trim() || !newDescription.trim()}
+				/>
 			</div>
 
 			<BtnArea activeBtn={activeBtn} setActiveBtn={setActiveBtn} />
